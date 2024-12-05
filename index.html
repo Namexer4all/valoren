@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ValoRen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            color: white;
+        }
+
+        .navbar {
+            background-color: #1a1a1a;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            color: #69e4f4;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Status Modal Styles */
+        .status-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 60px;
+            right: 20px;
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease-out;
+            border: 1px solid #333;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #2ecc71;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Home page styles */
+        .main-content {
+            display: flex;
+            padding: 4rem 6rem;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .left-content {
+            max-width: 600px;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: #eee;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .description {
+            color: #999;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .discord-btn {
+            background-color: #69e4f4;
+            color: black;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s;
+        }
+
+        .discord-btn:hover {
+            background-color: #5ad3e3;
+        }
+
+        .backup-btn {
+            background-color: #1a1a1a;
+            color: #999;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .backup-btn:hover {
+            background-color: #252525;
+        }
+
+        .right-content img {
+            width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(105, 228, 244, 0.2);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 4rem 6rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background-color: #1a1a1a;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .feature-card i {
+            color: #69e4f4;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #eee;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* Products page styles */
+        .products-container {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .products-title {
+            font-size: 1.5rem;
+            color: #69e4f4;
+        }
+
+        .items-count {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .product-card {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(105, 228, 244, 0.2);
+        }
+
+        .product-image-container {
+            width: 120px;
+            height: 120px;
+            flex-shrink: 0;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(105, 228, 244, 0.1);
+        }
+
+        .product-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 120px;
+        }
+
+        .product-header {
+            margin-bottom: 0.5rem;
+        }
+
+        .product-name {
+            font-size: 1.4rem;
+            color: #eee;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-status {
+            display: inline-block;
+            background-color: #2d2d2d;
+            color: #69e4f4;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .product-description {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .pricing-tabs {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-tab {
+            background-color: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .pricing-tab:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(105, 228, 244, 0.2);
+        }
+
+        .pricing-icon {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 1rem;
+            object-fit: contain;
+        }
+
+        .pricing-duration {
+            color: #eee;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price {
+            color: #69e4f4;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-tab button {
+            background-color: #69e4f4;
+            color: black;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .pricing-tab button:hover {
+            background-color: #5ad3e3;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close {
+            color: #999;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: white;
+        }
+
+        .modal-header {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .modal-header h2 {
+            color: #69e4f4;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .payment-method {
+            background-color: #2d2d2d;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .payment-method:hover {
+            background-color: #333;
+            transform: translateY(-2px);
+        }
+
+        .payment-method i {
+            font-size: 2rem;
+            color: #69e4f4;
+        }
+
+        .payment-method span {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .note {
+            color: #eee;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">ValoRen</div>
+        <div class="nav-links">
+            <a onclick="showHome()">Home</a>
+            <a onclick="showProducts()">Products</a>
+            <a onclick="toggleStatus()">Status</a>
+        </div>
+    </nav>
+
+    <!-- Status Modal -->
+    <div class="status-modal" id="statusModal">
+        <span class="status-dot"></span>
+        All Systems Operational
+    </div>
+
+    <!-- Home Page Content -->
+    <div id="home-content">
+        <div class="main-content">
+            <div class="left-content">
+                <h1 class="title">The ideal cheat provider</h1>
+                <p class="description">
+                    Tired of looking for a reliable cheat provider? Well good thing you found us. 
+                    At <span style="color: #69e4f4;">ValoRen</span> we only release the best of the best products.
+                </p>
+                <div class="buttons">
+                    <button class="discord-btn">
+                        <i class="fab fa-discord"></i> Discord Server
+                    </button>
+                    <button class="backup-btn" onclick="showProducts()">Products</button>
+                </div>
+            </div>
+            <div class="right-content">
+                <img src="800x450.png" alt="Menu Preview">
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Undetection</h3>
+                <p>Our cheats are constantly updated to ensure maximum security and reliability.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-headset"></i>
+                <h3>Support</h3>
+                <p>24/7 customer support to assist you with any issues or questions.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-star"></i>
+                <h3>Quality</h3>
+                <p>Premium features and regular updates to enhance your gaming experience.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Page Content -->
+    <div id="products-content" class="products-container">
+        <div class="products-header">
+            <h1 class="products-title">ValoRen - Skin Changer</h1>
+            <span class="items-count">1 Purchasable Item</span>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="Valoren.png" alt="ValoRen Skin Changer" class="product-image">
+            </div>
+            <div class="product-info">
+                <div>
+                    <h2 class="product-name">ValoRen Skin Changer</h2>
+                    <span class="product-status">Undetected</span>
+                    <p class="product-description">
+                        Experience Valorant with any skin you desire. Our skin changer provides access to all available skins in the game, 
+                        with regular updates to include new releases. Safe to use and regularly updated for maximum security.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="pricing-tabs">
+            <div class="pricing-tab">
+                <img src="Permanent.png" alt="Permanent" class="pricing-icon">
+                <div class="pricing-duration">Permanent License Key</div>
+                <div class="pricing-price">9.99€</div>
+                <button onclick="handlePurchase('Permanent License Key', '9.99')">Purchase</button>
+            </div>
+            
+            <div class="pricing-tab">
+                <img src="3 Month.png" alt="3 Month" class="pricing-icon">
+                <div class="pricing-duration">3 Month License Key</div>
+                <div class="pricing-price">7.99€</div>
+                <button onclick="handlePurchase('3 Month License Key', '7.99')">Purchase</button>
+            </div>
+            
+            <div class="pricing-tab">
+                <img src="1 Month.png" alt="1 Month" class="pricing-icon">
+                <div class="pricing-duration">1 Month License Key</div>
+                <div class="pricing-price">4.99€</div>
+                <button onclick="handlePurchase('1 Month License Key', '4.99')">Purchase</button>
+            </div>
+            
+            <div class="pricing-tab">
+                <img src="1 Week.png" alt="1 Week" class="pricing-icon">
+                <div class="pricing-duration">1 Week License Key</div>
+                <div class="pricing-price">3.99€</div>
+                <button onclick="handlePurchase('1 Week License Key', '3.99')">Purchase</button>
+            </div>
+            
+            <div class="pricing-tab">
+                <img src="1 Day.png" alt="1 Day" class="pricing-icon">
+                <div class="pricing-duration">1 Day License Key</div>
+                <div class="pricing-price">2.99€</div>
+                <button onclick="handlePurchase('1 Day License Key', '2.99')">Purchase</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>ValoRen Skin Changer</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="note">
+                    <p>After payment, contact SystemHook or RUGECY on Discord: <a href="https://discord.gg/XUqRVxdfHY" target="_blank">Join Discord</a></p>
+                </div>
+                <h3>Select Payment Method</h3>
+                <div class="payment-grid">
+                    <a href="https://paypal.me/ValorenPayouts?country.x=GR&locale.x=en_US" target="_blank" class="payment-method">
+                        <i class="fab fa-paypal"></i>
+                        <span>PayPal</span>
+                    </a>
+                    <button class="payment-method">
+                        <i class="far fa-credit-card"></i>
+                        <span>Credit Card</span>
+                    </button>
+                    <button class="payment-method">
+                        <i class="fab fa-bitcoin"></i>
+                        <span>Cryptocurrency</span>
+                    </button>
+                    <button class="payment-method">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Selix</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showHome() {
+            document.getElementById('home-content').style.display = 'block';
+            document.getElementById('products-content').style.display = 'none';
+        }
+
+        function showProducts() {
+            document.getElementById('home-content').style.display = 'none';
+            document.getElementById('products-content').style.display = 'block';
+        }
+
+        // Show home page by default
+        showHome();
+
+        // Modal functionality
+        const modal = document.getElementById("purchaseModal");
+        const span = document.getElementsByClassName("close")[0];
+        
+        function openPurchaseModal() {
+            modal.style.display = "block";
+        }
+        
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        
+        // Update all purchase buttons to open the modal
+        document.querySelectorAll('.purchase-btn, .pricing-tab button').forEach(button => {
+            button.onclick = openPurchaseModal;
+        });
+
+        // Function to handle purchase and send to Discord webhook
+        function handlePurchase(duration, price) {
+            const receiptNumber = sendPurchaseToWebhook(duration, price);
+            alert(`Purchase successful! Your receipt number is: ${receiptNumber}`);
+        }
+
+        // Function to send purchase details to Discord webhook
+        function sendPurchaseToWebhook(duration, price) {
+            const webhookUrl = "https://discord.com/api/webhooks/1314213792929939456/0tpSw4gx0MlDd2iY4oGkkiZ9cODsQ3hNuppkpI74zW9ZFi2SJ87_s9UA3oDcVQWNYRFp";
+            
+            // Generate random receipt number
+            const receiptNumber = 'VR-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            
+            const data = {
+                embeds: [{
+                    title: "New Purchase Confirmation",
+                    color: 0x69e4f4,
+                    fields: [
+                        {
+                            name: "Product",
+                            value: "ValoRen Skin Changer",
+                            inline: true
+                        },
+                        {
+                            name: "Duration",
+                            value: duration,
+                            inline: true
+                        },
+                        {
+                            name: "Price",
+                            value: price + "€",
+                            inline: true
+                        },
+                        {
+                            name: "Receipt Number",
+                            value: receiptNumber,
+                            inline: false
+                        }
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            return receiptNumber;
+        }
+
+        // Add this new function for status toggle
+        function toggleStatus() {
+            const statusModal = document.getElementById('statusModal');
+            if (statusModal.style.display === 'block') {
+                statusModal.style.display = 'none';
+            } else {
+                statusModal.style.display = 'block';
+                // Auto-hide after 3 seconds
+                setTimeout(() => {
+                    statusModal.style.display = 'none';
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>
