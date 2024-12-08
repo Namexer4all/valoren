@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ValoRen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -49,58 +50,6 @@
             color: white;
         }
 
-        /* Status Modal Styles */
-        .status-modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 60px;
-            right: 20px;
-            background: #1a1a1a;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            animation: slideIn 0.3s ease-out;
-            border: 1px solid #333;
-        }
-
-        .status-dot {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            background: #2ecc71;
-            border-radius: 50%;
-            margin-right: 8px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.2);
-                opacity: 0.7;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* Home page styles */
         .main-content {
             display: flex;
             padding: 4rem 6rem;
@@ -151,60 +100,6 @@
             background-color: #5ad3e3;
         }
 
-        .backup-btn {
-            background-color: #1a1a1a;
-            color: #999;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .backup-btn:hover {
-            background-color: #252525;
-        }
-
-        .right-content img {
-            width: 500px;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(105, 228, 244, 0.2);
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            padding: 4rem 6rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .feature-card {
-            background-color: #1a1a1a;
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .feature-card i {
-            color: #69e4f4;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            color: #eee;
-            margin-bottom: 0.5rem;
-        }
-
-        .feature-card p {
-            color: #999;
-            font-size: 0.9rem;
-        }
-
-        /* Products page styles */
         .products-container {
             display: none;
             max-width: 1200px;
@@ -212,186 +107,124 @@
             padding: 2rem;
         }
 
-        .products-header {
+        .tabs {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .products-title {
-            font-size: 1.5rem;
-            color: #69e4f4;
-        }
-
-        .items-count {
-            color: #999;
-            font-size: 0.9rem;
-        }
-
-        .product-card {
-            background-color: #1a1a1a;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            display: flex;
-            gap: 1.5rem;
-            align-items: flex-start;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(105, 228, 244, 0.2);
-        }
-
-        .product-image-container {
-            width: 120px;
-            height: 120px;
-            flex-shrink: 0;
-        }
-
-        .product-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(105, 228, 244, 0.1);
-        }
-
-        .product-info {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 120px;
-        }
-
-        .product-header {
-            margin-bottom: 0.5rem;
-        }
-
-        .product-name {
-            font-size: 1.4rem;
-            color: #eee;
-            margin-bottom: 0.5rem;
-        }
-
-        .product-status {
-            display: inline-block;
-            background-color: #2d2d2d;
-            color: #69e4f4;
-            padding: 0.3rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            margin-top: 0.5rem;
-        }
-
-        .product-description {
-            color: #999;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .product-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-        }
-
-        .pricing-tabs {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
             gap: 1rem;
-            margin-top: 1rem;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .tab-button {
+            background: #1a1a1a;
+            border: none;
+            padding: 1rem 2rem;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .tab-button.active {
+            background: #69e4f4;
+            color: black;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            padding: 2rem;
         }
 
         .pricing-tab {
-            background-color: #1a1a1a;
-            padding: 1.5rem;
-            border-radius: 8px;
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border-radius: 15px;
+            padding: 2rem;
             text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .pricing-tab:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(105, 228, 244, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(105, 228, 244, 0.2);
         }
 
-        .pricing-icon {
+        .pricing-tab img {
             width: 120px;
             height: 120px;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             object-fit: contain;
         }
 
         .pricing-duration {
-            color: #eee;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .pricing-price {
-            color: #69e4f4;
-            font-size: 1.2rem;
+            color: #fff;
+            font-size: 1.4rem;
             font-weight: bold;
             margin-bottom: 1rem;
         }
 
-        .pricing-tab button {
-            background-color: #69e4f4;
+        .pricing-description {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .pricing-price {
+            color: #69e4f4;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .purchase-btn {
+            background: linear-gradient(45deg, #69e4f4, #5ad3e3);
             color: black;
             padding: 0.8rem 1.5rem;
             border: none;
             border-radius: 4px;
             font-weight: bold;
             cursor: pointer;
-            width: 100%;
-            transition: background-color 0.3s;
+            transition: transform 0.3s;
         }
 
-        .pricing-tab button:hover {
-            background-color: #5ad3e3;
+        .purchase-btn:hover {
+            transform: scale(1.05);
         }
 
-        /* Modal styles */
         .modal {
             display: none;
             position: fixed;
-            z-index: 1;
+            z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(0, 0, 0, 0.8);
+            padding-top: 60px;
         }
 
         .modal-content {
             background-color: #1a1a1a;
-            margin: 15% auto;
+            margin: 5% auto;
             padding: 20px;
-            border: 1px solid #333;
-            border-radius: 8px;
+            border: 1px solid #888;
             width: 80%;
             max-width: 500px;
-            position: relative;
+            border-radius: 8px;
         }
 
         .close {
-            color: #999;
+            color: #aaa;
             float: right;
             font-size: 28px;
             font-weight: bold;
@@ -399,211 +232,202 @@
         }
 
         .close:hover {
-            color: white;
+            color: #fff;
         }
 
-        .modal-header {
-            margin-bottom: 1rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #333;
+        .login-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
         }
 
-        .modal-header h2 {
-            color: #69e4f4;
-        }
-
-        .payment-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .payment-method {
-            background-color: #2d2d2d;
-            padding: 1rem;
+        .login-modal-content {
+            background-color: #1a1a1a;
+            margin: 5% auto;
+            padding: 2rem;
             border-radius: 8px;
-            text-align: center;
-            text-decoration: none;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.8rem;
+            width: 90%;
+            max-width: 400px;
         }
 
-        .payment-method:hover {
-            background-color: #333;
-            transform: translateY(-2px);
-        }
-
-        .payment-method i {
-            font-size: 2rem;
-            color: #69e4f4;
-        }
-
-        .payment-method span {
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .note {
-            color: #eee;
+        .form-group {
             margin-bottom: 1rem;
-            font-size: 0.9rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #333;
+            background: #2a2a2a;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 0.8rem;
+            background: #69e4f4;
+            border: none;
+            border-radius: 4px;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .form-switch {
+            text-align: center;
+            margin-top: 1rem;
+            color: #999;
+        }
+
+        .form-switch a {
+            color: #69e4f4;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
-    <nav class="navbar">
+    <div class="navbar">
         <div class="logo">ValoRen</div>
         <div class="nav-links">
-            <a onclick="showHome()">Home</a>
-            <a onclick="showProducts()">Products</a>
-            <a onclick="toggleStatus()">Status</a>
-        </div>
-    </nav>
-
-    <!-- Status Modal -->
-    <div class="status-modal" id="statusModal">
-        <span class="status-dot"></span>
-        All Systems Operational
-    </div>
-
-    <!-- Home Page Content -->
-    <div id="home-content">
-        <div class="main-content">
-            <div class="left-content">
-                <h1 class="title">The ideal cheat provider</h1>
-                <p class="description">
-                    Tired of looking for a reliable cheat provider? Well good thing you found us. 
-                    At <span style="color: #69e4f4;">ValoRen</span> we only release the best of the best products.
-                </p>
-                <div class="buttons">
-                    <button class="discord-btn">
-                        <i class="fab fa-discord"></i> Discord Server
-                    </button>
-                    <button class="backup-btn" onclick="showProducts()">Products</button>
-                </div>
-            </div>
-            <div class="right-content">
-                <img src="800x450.png" alt="Menu Preview">
-            </div>
-        </div>
-
-        <div class="features">
-            <div class="feature-card">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Undetection</h3>
-                <p>Our cheats are constantly updated to ensure maximum security and reliability.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-headset"></i>
-                <h3>Support</h3>
-                <p>24/7 customer support to assist you with any issues or questions.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-star"></i>
-                <h3>Quality</h3>
-                <p>Premium features and regular updates to enhance your gaming experience.</p>
-            </div>
+            <a href="#" onclick="showHome()">Home</a>
+            <a href="#" onclick="showProducts()">Products</a>
+            <a href="https://discord.gg/XUqRVxdfHY" target="_blank">Discord</a>
         </div>
     </div>
 
-    <!-- Products Page Content -->
+    <div id="home-content" class="main-content">
+        <div class="left-content">
+            <h1 class="title">Welcome to ValoRen</h1>
+            <p class="description">Experience the ultimate gaming experience. Join our community and enhance your gaming experience with exclusive features.</p>
+            <div class="buttons">
+                <button class="discord-btn" onclick="window.open('https://discord.gg/XUqRVxdfHY', '_blank')">
+                    <i class="fab fa-discord"></i> Join Discord
+                </button>
+                <button class="discord-btn" onclick="showProducts()" style="background-color: #5ad3e3;">
+                    <i class="fas fa-shopping-cart"></i> Products
+                </button>
+            </div>
+            <p style="margin-top: 20px; color: #999;">
+                Want to donate to us but you don't have money? Just click here <a href="https://bit.ly/4f9Q8NV" target="_blank" style="color: #69e4f4; text-decoration: none;">bit.ly</a> donate us for free! ☕
+            </p>
+        </div>
+        <div class="right-content">
+            <img src="800x450.png" alt="ValoRen" style="max-width: 100%; border-radius: 15px;">
+        </div>
+    </div>
+
     <div id="products-content" class="products-container">
-        <div class="products-header">
-            <h1 class="products-title">ValoRen - Skin Changer</h1>
-            <span class="items-count">1 Purchasable Item</span>
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('skinchanger')">Skin Changer</button>
+            <button class="tab-button" onclick="switchTab('vbucks')">Spoofers</button>
         </div>
 
-        <div class="product-card">
-            <div class="product-image-container">
-                <img src="Valoren.png" alt="ValoRen Skin Changer" class="product-image">
-            </div>
-            <div class="product-info">
-                <div>
-                    <h2 class="product-name">ValoRen Skin Changer</h2>
-                    <span class="product-status">Undetected</span>
-                    <p class="product-description">
-                        Experience Valorant with any skin you desire. Our skin changer provides access to all available skins in the game, 
-                        with regular updates to include new releases. Safe to use and regularly updated for maximum security.
-                    </p>
+        <div id="skinchanger-tab" class="tab-content active">
+            <div class="pricing-grid">
+                <div class="pricing-tab">
+                    <img src="1 Day.png" alt="1 Day">
+                    <div class="pricing-duration">1 Day</div>
+                    <div class="pricing-price">2.99€</div>
+                    <button onclick="handlePurchase('1 Day', '2.99')" class="purchase-btn">Purchase</button>
+                </div>
+                
+                <div class="pricing-tab">
+                    <img src="1 Week.png" alt="1 Week">
+                    <div class="pricing-duration">1 Week</div>
+                    <div class="pricing-price">3.99€</div>
+                    <button onclick="handlePurchase('1 Week', '3.99')" class="purchase-btn">Purchase</button>
+                </div>
+                
+                <div class="pricing-tab">
+                    <img src="1 Month.png" alt="1 Month">
+                    <div class="pricing-duration">1 Month</div>
+                    <div class="pricing-price">4.99€</div>
+                    <button onclick="handlePurchase('1 Month', '4.99')" class="purchase-btn">Purchase</button>
+                </div>
+                
+                <div class="pricing-tab">
+                    <img src="3 Month.png" alt="3 Month">
+                    <div class="pricing-duration">3 Month</div>
+                    <div class="pricing-price">7.99€</div>
+                    <button onclick="handlePurchase('3 Month', '7.99')" class="purchase-btn">Purchase</button>
+                </div>
+                
+                <div class="pricing-tab">
+                    <img src="Permanent.png" alt="Permanent">
+                    <div class="pricing-duration">Permanent</div>
+                    <div class="pricing-price">9.99€</div>
+                    <button onclick="handlePurchase('Permanent', '9.99')" class="purchase-btn">Purchase</button>
                 </div>
             </div>
         </div>
 
-        <div class="pricing-tabs">
-            <div class="pricing-tab">
-                <img src="Permanent.png" alt="Permanent" class="pricing-icon">
-                <div class="pricing-duration">Permanent License Key</div>
-                <div class="pricing-price">9.99€</div>
-                <button onclick="handlePurchase('Permanent License Key', '9.99')">Purchase</button>
-            </div>
-            
-            <div class="pricing-tab">
-                <img src="3 Month.png" alt="3 Month" class="pricing-icon">
-                <div class="pricing-duration">3 Month License Key</div>
-                <div class="pricing-price">7.99€</div>
-                <button onclick="handlePurchase('3 Month License Key', '7.99')">Purchase</button>
-            </div>
-            
-            <div class="pricing-tab">
-                <img src="1 Month.png" alt="1 Month" class="pricing-icon">
-                <div class="pricing-duration">1 Month License Key</div>
-                <div class="pricing-price">4.99€</div>
-                <button onclick="handlePurchase('1 Month License Key', '4.99')">Purchase</button>
-            </div>
-            
-            <div class="pricing-tab">
-                <img src="1 Week.png" alt="1 Week" class="pricing-icon">
-                <div class="pricing-duration">1 Week License Key</div>
-                <div class="pricing-price">3.99€</div>
-                <button onclick="handlePurchase('1 Week License Key', '3.99')">Purchase</button>
-            </div>
-            
-            <div class="pricing-tab">
-                <img src="1 Day.png" alt="1 Day" class="pricing-icon">
-                <div class="pricing-duration">1 Day License Key</div>
-                <div class="pricing-price">2.99€</div>
-                <button onclick="handlePurchase('1 Day License Key', '2.99')">Purchase</button>
+        <div id="vbucks-tab" class="tab-content">
+            <div class="pricing-grid">
+                <div class="pricing-tab">
+                    <img src="VGC.png" alt="VGC">
+                    <div class="pricing-duration">ValoRen VGC</div>
+                    <div class="pricing-description">Get exclusive ValoRen VGC BYPASS For Free! This is like an spoofer GET UNBANNED! (This content is mine do not try to sell it ).<br><br>Password: VGCVALOREN</div>
+                    <div class="pricing-price">FREE</div>
+                    <button onclick="showLoginModal()" class="purchase-btn">GET</button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Purchase Modal -->
-    <div id="purchaseModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>ValoRen Skin Changer</h2>
-                <span class="close">&times;</span>
-            </div>
-            <div class="modal-body">
-                <div class="note">
-                    <p>After payment, contact SystemHook or RUGECY on Discord: <a href="https://discord.gg/XUqRVxdfHY" target="_blank">Join Discord</a></p>
+    <!-- Login Modal -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-modal-content">
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+            <div id="loginForm">
+                <h2>Login</h2>
+                <div class="form-group">
+                    <label for="loginUsername">Username</label>
+                    <input type="text" id="loginUsername" required>
                 </div>
-                <h3>Select Payment Method</h3>
-                <div class="payment-grid">
-                    <a href="https://paypal.me/ValorenPayouts?country.x=GR&locale.x=en_US" target="_blank" class="payment-method">
-                        <i class="fab fa-paypal"></i>
-                        <span>PayPal</span>
-                    </a>
-                    <button class="payment-method">
-                        <i class="far fa-credit-card"></i>
-                        <span>Credit Card</span>
-                    </button>
-                    <button class="payment-method">
-                        <i class="fab fa-bitcoin"></i>
-                        <span>Cryptocurrency</span>
-                    </button>
-                    <button class="payment-method">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span>Selix</span>
-                    </button>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <div class="form-group">
+                    <button onclick="handleLogin()">Login</button>
+                </div>
+                <div class="form-switch">
+                    Don't have an account? <a onclick="switchToRegister()">Register</a>
+                </div>
+            </div>
+            <div id="registerForm" style="display: none;">
+                <h2>Register</h2>
+                <div class="form-group">
+                    <label for="registerUsername">Username</label>
+                    <input type="text" id="registerUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <div class="form-group">
+                    <button onclick="handleRegister()">Register</button>
+                </div>
+                <div class="form-switch">
+                    Already have an account? <a onclick="switchToLogin()">Login</a>
                 </div>
             </div>
         </div>
@@ -611,7 +435,7 @@
 
     <script>
         function showHome() {
-            document.getElementById('home-content').style.display = 'block';
+            document.getElementById('home-content').style.display = 'flex';
             document.getElementById('products-content').style.display = 'none';
         }
 
@@ -620,99 +444,96 @@
             document.getElementById('products-content').style.display = 'block';
         }
 
-        // Show home page by default
-        showHome();
-
-        // Modal functionality
-        const modal = document.getElementById("purchaseModal");
-        const span = document.getElementsByClassName("close")[0];
-        
-        function openPurchaseModal() {
-            modal.style.display = "block";
-        }
-        
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-        
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-        
-        // Update all purchase buttons to open the modal
-        document.querySelectorAll('.purchase-btn, .pricing-tab button').forEach(button => {
-            button.onclick = openPurchaseModal;
-        });
-
-        // Function to handle purchase and send to Discord webhook
-        function handlePurchase(duration, price) {
-            const receiptNumber = sendPurchaseToWebhook(duration, price);
-            alert(`Purchase successful! Your receipt number is: ${receiptNumber}`);
-        }
-
-        // Function to send purchase details to Discord webhook
-        function sendPurchaseToWebhook(duration, price) {
-            const webhookUrl = "https://discord.com/api/webhooks/1314213792929939456/0tpSw4gx0MlDd2iY4oGkkiZ9cODsQ3hNuppkpI74zW9ZFi2SJ87_s9UA3oDcVQWNYRFp";
-            
-            // Generate random receipt number
-            const receiptNumber = 'VR-' + Math.random().toString(36).substr(2, 9).toUpperCase();
-            
-            const data = {
-                embeds: [{
-                    title: "New Purchase Confirmation",
-                    color: 0x69e4f4,
-                    fields: [
-                        {
-                            name: "Product",
-                            value: "ValoRen Skin Changer",
-                            inline: true
-                        },
-                        {
-                            name: "Duration",
-                            value: duration,
-                            inline: true
-                        },
-                        {
-                            name: "Price",
-                            value: price + "€",
-                            inline: true
-                        },
-                        {
-                            name: "Receipt Number",
-                            value: receiptNumber,
-                            inline: false
-                        }
-                    ],
-                    timestamp: new Date().toISOString()
-                }]
-            };
-
-            fetch(webhookUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
             });
+            event.currentTarget.classList.add('active');
 
-            return receiptNumber;
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabName + '-tab').classList.add('active');
         }
 
-        // Add this new function for status toggle
-        function toggleStatus() {
-            const statusModal = document.getElementById('statusModal');
-            if (statusModal.style.display === 'block') {
-                statusModal.style.display = 'none';
+        function showLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
+
+        function switchToRegister() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+        }
+
+        function switchToLogin() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('registerForm').style.display = 'none';
+        }
+
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+
+        function handleRegister() {
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            if (users.some(user => user.username === username)) {
+                alert('Username already exists!');
+                return;
+            }
+
+            users.push({ username, password });
+            localStorage.setItem('users', JSON.stringify(users));
+            alert('Registration successful! Please login.');
+            switchToLogin();
+        }
+
+        function handleLogin() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                closeLoginModal();
+                const link = document.createElement('a');
+                link.href = 'https://shrinkme.ink/zTYZlm';
+                link.download = 'ValoRen_VBucks.rar';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                alert('Login successful! Your download will begin shortly. Remember the password: VGCVALOREN');
             } else {
-                statusModal.style.display = 'block';
-                // Auto-hide after 3 seconds
-                setTimeout(() => {
-                    statusModal.style.display = 'none';
-                }, 3000);
+                alert('Invalid username or password!');
             }
         }
+
+        function handlePurchase(duration, price) {
+            // Show message with PayPal.me instructions
+            alert(`NOTE: To purchase ${duration} access:\n\n1. Send ${price}€ to https://paypal.me/ValorenPayouts\n2. Take a screenshot of your payment proof\n3. Join our Discord server\n4. DM either ! SystemHook or RUGECY with your proof to receive your product.`);
+            
+            // Open PayPal.me in new tab
+            window.open('https://paypal.me/ValorenPayouts', '_blank');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.className === 'modal' || event.target.className === 'login-modal') {
+                event.target.style.display = 'none';
+            }
+        }
+
+        showHome();
     </script>
 </body>
 </html>
+
